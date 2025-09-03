@@ -30,6 +30,13 @@ namespace E_CommerceSystem
                         .HasIndex(u => u.Email)
                         .IsUnique();
 
+            // Category (1) → (many) Products
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.Category)
+                .WithMany(c => c.Products)
+                .HasForeignKey(p => p.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }
