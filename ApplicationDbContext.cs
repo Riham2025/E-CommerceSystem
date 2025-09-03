@@ -42,7 +42,7 @@ namespace E_CommerceSystem
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.Supplier) // Each Product has one Supplier
                 .WithMany(s => s.Products) // Each Supplier has many Products
-                .HasForeignKey(p => p.SupplierId)
+                .HasForeignKey(p => p.SupplierId) // Foreign key in Product
                 .OnDelete(DeleteBehavior.Restrict);
 
         }
