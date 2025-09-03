@@ -8,9 +8,9 @@ namespace E_CommerceSystem.Models
         [Key] public int SupplierId { get; set; } // Primary Key
 
         [Required, MaxLength(120)] // Name of the supplier
-        public string Name { get; set; } = null!;
+        public string Name { get; set; } = null!; // Non-nullable
 
-        [EmailAddress, MaxLength(200)]
+        [EmailAddress, MaxLength(200)] // Contact email of the supplier
         public string? ContactEmail { get; set; }
 
         [Phone, MaxLength(30)]
