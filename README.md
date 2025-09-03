@@ -13,9 +13,6 @@
 - [Security](#security)
 - [API Surface (high level)](#api-surface-high-level)
 - [Run Locally](#run-locally)
-- [Roadmap / Future Work](#roadmap--future-work)
-- [Conventions](#conventions)
-- [License](#license)
 
 ---
 
