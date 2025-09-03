@@ -15,3 +15,12 @@ Manages customers & admins (fields: UID, UName, Email, Password, Role, etc.)
 One User → Many Orders
 
 One User → Many Reviews
+
+Products : 
+
+Manages product catalog (fields: PID, ProductName, Description, Price, Stock, OverallRating)
+
+One Product → Many Reviews
+
+Many Products ↔ Many Orders (via OrderProducts)
+
