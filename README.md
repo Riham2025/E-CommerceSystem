@@ -120,7 +120,7 @@ Project Structure
 
 
 
-E-CommerceSystem/
+```  E-CommerceSystem/
 
 ├─ Controllers/
 │  ├─ ProductsController.cs
@@ -154,6 +154,8 @@ E-CommerceSystem/
 │  ├─ ErrorHandlingMiddleware.cs     # centralized exception to ProblemDetails
 │  └─ Logging (Serilog) setup
 └─ Program.cs                         # DI, JWT, Swagger, CORS, Serilog
+```
+
 DTOs & Mapping
 Why DTOs?
 
