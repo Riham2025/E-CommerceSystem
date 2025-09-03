@@ -14,7 +14,7 @@ namespace E_CommerceSystem.Models
         public string? ContactEmail { get; set; } // Nullable
 
         [Phone, MaxLength(30)] // Contact phone number of the supplier
-        public string? Phone { get; set; }
+        public string? Phone { get; set; } // Nullable
 
         // One Supplier → Many Products
         public ICollection<Product> Products { get; set; } = new List<Product>();
