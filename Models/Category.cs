@@ -7,7 +7,7 @@ namespace E_CommerceSystem.Models
     {
         [Key] public int CategoryId { get; set; } // Primary Key
 
-        [Required, MaxLength(100)]
+        [Required, MaxLength(100)] // Name of the category
         public string Name { get; set; } = null!;
 
         [MaxLength(500)]
