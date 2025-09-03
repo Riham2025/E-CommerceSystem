@@ -15,6 +15,10 @@ namespace E_CommerceSystem
         public DbSet<OrderProducts> OrderProducts { get; set; }
         public DbSet<Review> Reviews { get; set; }
 
+        public DbSet<Category> Categories => Set<Category>(); // Using expression-bodied property
+        public DbSet<Supplier> Suppliers => Set<Supplier>();
+        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
