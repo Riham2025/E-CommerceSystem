@@ -35,7 +35,7 @@ namespace E_CommerceSystem
                 .HasOne(p => p.Category) // Each Product has one Category
                 .WithMany(c => c.Products) // Each Category has many Products
                 .HasForeignKey(p => p.CategoryId) // Foreign key in Product
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
 
         }
     }
