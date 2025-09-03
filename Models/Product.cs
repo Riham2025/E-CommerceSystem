@@ -28,5 +28,13 @@ namespace E_CommerceSystem.Models
 
         [JsonIgnore]
         public virtual ICollection<Review> Reviews { get; set; }
+
+        
+        public int CategoryId { get; set; } // FK → Category
+        public Category Category { get; set; } = null!;
+
+        public int SupplierId { get; set; }          // FK → Supplier
+        public Supplier Supplier { get; set; } = null!;
+
     }
 }
