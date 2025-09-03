@@ -17,7 +17,7 @@ namespace E_CommerceSystem.Models
         public string? Phone { get; set; } // Nullable
 
         // One Supplier → Many Products
-        public ICollection<Product> Products { get; set; } = new List<Product>();
+        public ICollection<Product> Products { get; set; } = new List<Product>(); // Initialize to avoid null reference
     }
 }
 
