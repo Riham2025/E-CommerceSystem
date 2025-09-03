@@ -1,320 +1,256 @@
-﻿## **E-CommerceSystem**
+﻿# E-CommerceSystem (Order Management System – Part 2)
 
 
 ---
 
-#  Order Management System – Part 2 (E-Commerce Backend)
-
-A production-ready **ASP.NET Core Web API** backend for an E-Commerce system.
-This phase extends the base code with new **models, services, security**, stronger **business rules**, and **analytics**.
-
----
-
-##  Goal of the Project
-
-Deliver a **secure, scalable, and extensible** backend that supports:
-
-* **Customers**: browse products, place/cancel orders, write reviews.
-* **Admins/Managers**: manage catalog, categories, suppliers; track sales; run reports.
-* **Developers**: clean layering (Controllers → Services → Repositories → EF Core), DTOs & AutoMapper, logs, tests.
-
----
-
-##  Tech Stack
-
-* **.NET / ASP.NET Core Web API**
-* **Entity Framework Core** (Migrations, LINQ, SQL Server)
-* **AutoMapper** (DTO ↔ Entity mapping)
-* **JWT Auth** with **Refresh Tokens** (tokens stored in Cookies)
-* **BCrypt** (password hashing)
-* **Serilog / ILogger** (structured logging)
-* **Mail (SMTP)** for notifications
-* (Optional) **PDF/Invoice**: QuestPDF or iText (implementation choice)
+## Table of Contents
+- [Architecture](#architecture)
+- [Database Schema](#database-schema)
+- [Entities & Relationships](#entities--relationships)
+- [Project Structure](#project-structure)
+- [DTOs & Mapping](#dtos--mapping)
+- [Services & Business Rules](#services--business-rules)
+- [Security](#security)
+- [API Surface (high level)](#api-surface-high-level)
+- [Run Locally](#run-locally)
+- [Roadmap / Future Work](#roadmap--future-work)
+- [Conventions](#conventions)
+- [License](#license)
 
 ---
 
-##  Database Schema
+## Architecture
 
+Layered architecture with clear separation of concerns:
 
+- **Models (Entities)** → EF Core entities that map to tables.
+- **Repositories** → Data access (CRUD, queries).
+- **Services** → Business logic, validation, transactions, cross-aggregate rules.
+- **DTOs** → Shape request/response payloads; avoid exposing EF entities directly.
+- **Controllers** → HTTP endpoints calling services.
 
-### Tables & Key Fields
-
-**Users**
-
-* `UID (PK)`, `UName`, `Email`, `PasswordHash`, `Phone`, `Role [Admin|Customer|Manager]`, `CreatedAt`, `RefreshToken`, `RefreshTokenExpiresAt`
-
-**Products**
-
-* `PID (PK)`, `ProductName`, `Description`, `Price`, `Stock`, `OverallRating`,
-  `CategoryId (FK)`, `SupplierId (FK)`, `ImageUrl` 
-
-**Orders**
-
-* `OID (PK)`, `UID (FK to Users)`, `OrderDate`, `TotalAmount`,
-  `Status [Pending|Paid|Shipped|Delivered|Cancelled]`, `RowVersion (Concurrency)`
-
-**OrderProducts** *(join table)*
-
-* `OID (FK)`, `PID (FK)`, `Quantity`, `UnitPrice`
-
-**Reviews**
-
-* `ReviewID (PK)`, `UID (FK)`, `PID (FK)`, `Rating`, `Comment`, `ReviewDate`
-
-**Categories** 
-
-* `CategoryId (PK)`, `Name`, `Description`
-
-**Suppliers** 
-
-* `SupplierId (PK)`, `Name`, `ContactEmail`, `Phone`
+Cross-cutting:
+- **AutoMapper** for DTO ↔ Entity mapping.
+- **FluentValidation / DataAnnotations** for input validation.
+- **Middleware** for error handling & logging.
 
 ---
 
-##  Project Structure
+## Database Schema
 
-```
+
+
+    USERS {
+      int UID PK
+      string UName
+      string Email
+      string Password
+      string Phone
+      string Role
+      datetime CreatedAt
+    }
+
+    PRODUCTS {
+      int PID PK
+      string ProductName
+      string Description
+      decimal Price
+      int Stock
+      decimal OverallRating
+    }
+
+    REVIEWS {
+      int ReviewID PK
+      int UID FK
+      int PID FK
+      int Rating
+      string Comment
+      datetime ReviewDate
+    }
+
+    ORDERS {
+      int OID PK
+      datetime OrderDate
+      decimal TotalAmount
+      int UID FK
+      string Status
+    }
+
+    ORDERPRODUCTS {
+      int OID FK
+      int PID FK
+      int Quantity
+    }
+
+
+    CATEGORY {
+      int CategoryId PK
+      string Name
+      string Description
+    }
+
+    SUPPLIER {
+      int SupplierId PK
+      string Name
+      string ContactEmail
+      string Phone
+    }
+The new Category and Supplier are one-to-many parents for Products (a product belongs to one category and one supplier). 
+
+Entities & Relationships
+
+Users ⟶ Orders (1-to-many)
+
+Orders ⟷ Products (many-to-many via OrderProducts)
+
+Products ⟶ Reviews (1-to-many)
+
+Users ⟶ Reviews (1-to-many)
+
+Category ⟶ Products (1-to-many) (new)
+
+Supplier ⟶ Products (1-to-many) (new)
+
+Key business notes:
+
+Orders.Status: Pending | Paid | Shipped | Delivered | Cancelled. (new) 
+
+On cancel, stock is restored. (new) 
+
+Reviews allowed only for purchased products; one review per product per user. (new) 
+
+Project Structure
+
+
+
 E-CommerceSystem/
-│
-├─ Controllers/             # Web API controllers (Products, Orders, Users, Reviews, Categories, Suppliers, Reports, Auth)
-├─ Services/                # Business services (interfaces + implementations)
-├─ Repository/              # Repositories (data access / EF Core)
-├─ DTOs/
-│  ├─ Requests/             # Create/Update input DTOs
-│  └─ Responses/            # Output DTOs (what APIs return)
-├─ Models/                  # EF Core entities
-├─ Mapping/                 # AutoMapper profiles
-├─ Migrations/              # EF Core migrations
-├─ Middleware/              # Error handling, logging, etc.
-├─ Infrastructure/          # Auth, Email, Pdf/Invoice helpers, FileStorage
-├─ appsettings*.json        # Configuration (DB, JWT, Mail, Serilog)
-├─ Program.cs               # Composition root (DI, middleware, endpoints)
-└─ README.md
-```
 
----
+├─ Controllers/
+│  ├─ ProductsController.cs
+│  ├─ OrdersController.cs
+│  ├─ ReviewsController.cs
+│  ├─ UsersController.cs
+│  ├─ CategoriesController.cs        
+│  └─ SuppliersController.cs  
+├─ Services/
+│  ├─ Interfaces/...
+│  ├─ Implementations/...
+│  ├─ OrderSummaryService.cs         #  (aggregates Orders + Products + Users)
+│  └─ FileStorage/ImageService.cs    #  (product images)
+├─ Repositories/
+│  ├─ Interfaces/...
+│  ├─ Ef/...
+│  ├─ CategoryRepository.cs          
+│  └─ SupplierRepository.cs          
+├─ DTO/
+│  ├─ ProductDto.cs / CreateProductDto.cs / UpdateProductDto.cs
+│  ├─ CategoryDto.cs (Create/Update) 
+│  ├─ SupplierDto.cs (Create/Update) 
+│  ├─ OrderDtos.cs (incl. summary)   
+│  └─ AuthDtos.cs
+├─ Mapping/
+│  └─ MappingProfile.cs              # AutoMapper profiles for all DTOs ↔ Entities
+├─ Persistence/
+│  ├─ ApplicationDbContext.cs        # DbSets + Fluent config
+│  └─ Migrations/                    # EF Core migrations & seed
+├─ Middleware/
+│  ├─ ErrorHandlingMiddleware.cs     # centralized exception to ProblemDetails
+│  └─ Logging (Serilog) setup
+└─ Program.cs                         # DI, JWT, Swagger, CORS, Serilog
+DTOs & Mapping
+Why DTOs?
 
-##  Features 
+Keep controllers thin and safe: never expose EF entities directly.
 
-### 1) New Models + CRUD + DTOs + AutoMapper
+Shape responses (pagination, filtering, HATEOAS if needed).
 
-* **Category** and **Supplier** added with full CRUD.
-* All controllers use **DTOs** and **AutoMapper** (no manual mapping).
+Validate inputs at the boundary.
 
-### 2) Services Enhancements
 
-* **Products: Pagination & Filtering**
 
-  * `GET /api/products?search=iphone&minPrice=100&maxPrice=1500&page=1&pageSize=20`
-* **Order Summary Service**
 
-  * Aggregates Orders + Users + Products (totals, lines, amounts).
-* **Product Image Upload**
 
-  * `POST /api/products/{id}/image` *(multipart/form-data)*.
-* **Order Cancellation**
+public record ProductDto(int PID, string ProductName, string Description,
+                         decimal Price, int Stock, decimal OverallRating,
+                         int CategoryId, int SupplierId);
 
-  * `POST /api/orders/{id}/cancel` (restores stock, sends email).
-* **Order Status Tracking**
+public record CreateProductDto(string ProductName, string Description,
+                               decimal Price, int Stock,
+                               int CategoryId, int SupplierId);
 
-  * Lifecycle: `Pending → Paid → Shipped → Delivered` (or `Cancelled`).
-* **Email Notifications**
+public record UpdateProductDto(string? ProductName, string? Description,
+                               decimal? Price, int? Stock,
+                               int? CategoryId, int? SupplierId);
+AutoMapper configuration:
 
-  * Sent when an order is **placed** or **canceled**.
-* **Invoice Generation (PDF)**
 
-  * `GET /api/orders/{id}/invoice` .
 
-### 3) Security & Authentication
+CreateMap<Product, ProductDto>();
+CreateMap<CreateProductDto, Product>();
+CreateMap<UpdateProductDto, Product>()
+    .ForAllMembers(opt => opt.Condition((src, _, val) => val != null));
 
-* **JWT + Refresh Tokens** (refresh stored in DB; tokens stored in **Cookies**).
-* Passwords stored as **BCrypt hashes**.
-* **Role-based authorization**: `Admin`, `Customer`, `Manager`.
+Services & Business Rules
+Enhancements (Part 2): 
 
-### 4) Business Rules (Enforced in Services)
+Products
 
-* A user can **only review products they purchased**.
-* A user **cannot add more than one review** to the same product.
-* **Optimistic Concurrency** on products & orders via `RowVersion` (timestamp):
+Get-all with pagination & filtering (name, price range).
 
-  * Clients must send the latest `RowVersion` when updating.
+Image upload (store path or blob; validate type/size).
 
-### 5) Reports & Analytics (Admin)
+Orders
 
-* **Best-selling products**: `/api/admin/reports/best-sellers?from=2025-01-01&to=2025-01-31`
-* **Revenue reports** (daily/monthly): `/api/admin/reports/revenue?granularity=month&from=...&to=...`
-* **Top-rated products**: `/api/admin/reports/top-rated`
-* **Most active customers**: `/api/admin/reports/active-customers`
+Status tracking: Pending → Paid → Shipped → Delivered; with Cancelled branch.
 
-### 6) Code Quality
+Cancellation restores product stock.
 
-* **Centralized error handling** middleware (uniform problem details).
-* **Serilog** (file/console sinks) + `ILogger` in services/controllers.
+Invoice generation (PDF/report).
 
----
+Order summary service (aggregates Orders+Products+Users).
 
-##  Getting Started
+Email notifications on placed / canceled orders.
 
-### 1) Configure
+Reviews
 
-Update **`appsettings.json`** (or `appsettings.Development.json`):
+Only purchasers can review; max one review per product+user.
 
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=.;Database=ECommerceDb;Trusted_Connection=True;TrustServerCertificate=True"
-  },
-  "Jwt": {
-    "Issuer": "ECommerce.Api",
-    "Audience": "ECommerce.SPA",
-    "Key": "SUPER-SECRET-KEY-CHANGE-ME",
-    "AccessTokenMinutes": 15,
-    "RefreshTokenDays": 7
-  },
-  "Mail": {
-    "SmtpHost": "smtp.example.com",
-    "SmtpPort": 587,
-    "User": "no-reply@example.com",
-    "Password": "CHANGE_ME",
-    "FromName": "E-Commerce"
-  },
-  "Serilog": {
-    "MinimumLevel": "Information",
-    "WriteTo": [ { "Name": "Console" } ]
-  }
-}
-```
+Concurrency
 
-### 2) Database
+Use rowversion/timestamp on Product/Order to prevent lost updates (409 on mismatch).
 
-```bash
-dotnet tool install --global dotnet-ef           
-dotnet ef database update                         # apply migrations
-```
+Security
+JWT authentication with refresh tokens; tokens stored in cookies. 
 
-### 3) Run
+Roles: Admin, Customer, Manager (policy-based authorization). 
 
-```bash
-dotnet run
-# Swagger UI will be available at /swagger
-```
+Password hashing using BCrypt or ASP.NET Core Identity’s PBKDF2. 
 
----
+API Surface (high level)
+POST /api/auth/register, POST /api/auth/login, POST /api/auth/refresh
 
-##  Authentication Flow
+GET /api/products?name=&minPrice=&maxPrice=&page=&pageSize=
 
-* **Register/Login** to receive **access token** (JWT) and **refresh token**.
-* Tokens are stored in **HTTP-Only cookies**.
-* When the access token expires, call `POST /api/auth/refresh` to get a new one.
-* Logout clears cookies and revokes refresh token.
+POST /api/products/{id}/image (multipart/form-data)
 
----
+GET /api/orders/{id} , POST /api/orders , POST /api/orders/{id}/cancel
 
-##  Common API Examples
+GET /api/orders/{id}/invoice (PDF)
 
-### Products (Pagination & Filter)
+POST /api/reviews (enforces purchase + single review rule)
 
-```
-GET /api/products?search=watch&minPrice=100&maxPrice=400&page=2&pageSize=12
-```
+CRUD /api/categories (new) , CRUD /api/suppliers (new)
 
-### Product Image Upload
+GET /api/admin/reports/best-sellers | revenue | top-rated | active-customers (new)
 
-```
-POST /api/products/{pid}/image
-Content-Type: multipart/form-data
-Body: file=@/path/to/image.jpg
-```
+Run Locally
+Configure connection string in appsettings.json.
 
-### Create Order
+Apply migrations & seed:
 
-```
-POST /api/orders
-{
-  "userId": 42,
-  "items": [
-    { "productId": 1, "quantity": 2 },
-    { "productId": 5, "quantity": 1 }
-  ]
-}
-```
 
-### Cancel Order (restores stock + email)
 
-```
-POST /api/orders/{oid}/cancel
-```
-
-### Add Review (Purchase-guarded)
-
-```
-POST /api/reviews
-{
-  "productId": 10,
-  "rating": 5,
-  "comment": "Excellent!"
-}
-```
-
-> Service validates that the user has bought `productId` and hasn’t already reviewed it.
-
-### Concurrency (RowVersion)
-
-* Entities expose `rowVersion` (base64).
-* Client must include the latest value when updating:
-
-```
-PUT /api/orders/{oid}
-If-Match: "base64RowVersionHere"  # or send in body (depending on design)
-```
-
----
-
-##  AutoMapper & DTOs
-
-* Incoming requests use **Request DTOs** (Create/Update).
-* Responses use **Response DTOs** (hide internal fields such as hashes, rowversion).
-* All mappings configured in `MappingProfiles`.
-
----
-
-##  Logging & Errors
-
-* **Serilog** records structured logs (request/response, exceptions).
-* Centralized **Error Handling Middleware** returns consistent **ProblemDetails** payloads.
-
----
-
-##  Admin Reports
-
-* **Best Sellers**: quantity & revenue per product.
-* **Revenue**: totals per day/month.
-* **Top Rated**: average ratings & counts.
-* **Active Customers**: orders & value per user.
-
----
-
-##  Future Work
-
-* External **payment gateway** integration (Stripe/PayPal).
-* **Docker** & containerized deployment.
-* **Redis** caching (catalog, reports).
-* **CI/CD** (GitHub Actions/Azure DevOps).
-* **Rate limiting** & **API Keys** for partners.
-* **Search** improvements (EF.Functions.FreeText / Elastic).
-
----
-
-##  Contribution
-
-1. Create a feature branch: `feat/<short-name>`
-2. Add unit/integration tests when possible.
-3. Follow existing patterns (DTOs, Services, Repos, AutoMapper).
-4. Submit PR with a clear description & screenshots (when relevant).
-
----
-
-
+dotnet ef database update
 
 
 
