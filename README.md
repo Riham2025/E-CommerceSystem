@@ -9,18 +9,36 @@ As part of Phase 2, new features, enhancements, and stricter business rules were
 # Database Schema
 Entities & Relationships :
 
-Users :
+**Users :
 Manages customers & admins (fields: UID, UName, Email, Password, Role, etc.)
 
 One User → Many Orders
 
 One User → Many Reviews
 
-Products : 
+**Products : 
 
 Manages product catalog (fields: PID, ProductName, Description, Price, Stock, OverallRating)
 
 One Product → Many Reviews
 
 Many Products ↔ Many Orders (via OrderProducts)
+
+**Orders :
+
+Contains order details (fields: OID, OrderDate, TotalAmount, UID, Status)
+
+One Order → Many OrderProducts
+
+**OrderProducts :
+
+Join table for many-to-many (Order ↔ Product) with quantity
+
+Reviews
+
+Stores product reviews (fields: ReviewID, Rating, Comment, UID, PID)
+
+New Models (
+
+
 
