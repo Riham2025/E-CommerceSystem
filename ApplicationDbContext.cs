@@ -10,7 +10,9 @@ namespace E_CommerceSystem
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Product> Products => Set<Product>(); // Using expression-bodied property
+
+        public DbSet<Product> Products { get; set; }
+
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderProducts> OrderProducts { get; set; }
         public DbSet<Review> Reviews { get; set; }
@@ -21,6 +23,9 @@ namespace E_CommerceSystem
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder); // Call the base method
+
             modelBuilder.Entity<User>()
                         .HasIndex(u => u.Email)
                         .IsUnique();
