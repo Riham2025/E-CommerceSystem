@@ -168,7 +168,7 @@ Validate inputs at the boundary.
 
 
 
-
+```
 public record ProductDto(int PID, string ProductName, string Description,
                          decimal Price, int Stock, decimal OverallRating,
                          int CategoryId, int SupplierId);
@@ -180,25 +180,28 @@ public record CreateProductDto(string ProductName, string Description,
 public record UpdateProductDto(string? ProductName, string? Description,
                                decimal? Price, int? Stock,
                                int? CategoryId, int? SupplierId);
+```                               
+
 AutoMapper configuration:
 
 
 
-CreateMap<Product, ProductDto>();
+```  CreateMap<Product, ProductDto>();
 CreateMap<CreateProductDto, Product>();
 CreateMap<UpdateProductDto, Product>()
     .ForAllMembers(opt => opt.Condition((src, _, val) => val != null));
+```
 
 Services & Business Rules
 Enhancements (Part 2): 
 
-Products
+Products :
 
 Get-all with pagination & filtering (name, price range).
 
 Image upload (store path or blob; validate type/size).
 
-Orders
+Orders : 
 
 Status tracking: Pending → Paid → Shipped → Delivered; with Cancelled branch.
 
@@ -210,22 +213,26 @@ Order summary service (aggregates Orders+Products+Users).
 
 Email notifications on placed / canceled orders.
 
-Reviews
+Reviews :
 
 Only purchasers can review; max one review per product+user.
 
-Concurrency
+Concurrency : 
 
 Use rowversion/timestamp on Product/Order to prevent lost updates (409 on mismatch).
 
 Security
+
 JWT authentication with refresh tokens; tokens stored in cookies. 
 
-Roles: Admin, Customer, Manager (policy-based authorization). 
+Roles:
+
+Admin, Customer, Manager (policy-based authorization). 
 
 Password hashing using BCrypt or ASP.NET Core Identity’s PBKDF2. 
 
 API Surface (high level)
+```
 POST /api/auth/register, POST /api/auth/login, POST /api/auth/refresh
 
 GET /api/products?name=&minPrice=&maxPrice=&page=&pageSize=
@@ -242,12 +249,13 @@ CRUD /api/categories (new) , CRUD /api/suppliers (new)
 
 GET /api/admin/reports/best-sellers | revenue | top-rated | active-customers (new)
 
+```
+
 Run Locally
+
 Configure connection string in appsettings.json.
 
 Apply migrations & seed:
-
-
 
 dotnet ef database update
 
