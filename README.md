@@ -44,7 +44,7 @@ CategoryId, Name, Description
 
 One Category → Many Products
 
-Supplier
+**Supplier :
 
 SupplierId, Name, ContactEmail, Phone
 
