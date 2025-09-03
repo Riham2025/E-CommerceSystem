@@ -10,14 +10,14 @@ namespace E_CommerceSystem
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Product> Products => Set<Product>(); // Using expression-bodied property
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderProducts> OrderProducts { get; set; }
         public DbSet<Review> Reviews { get; set; }
 
         public DbSet<Category> Categories => Set<Category>(); // Using expression-bodied property
-        public DbSet<Supplier> Suppliers => Set<Supplier>();
-        
+        public DbSet<Supplier> Suppliers => Set<Supplier>(); // Using expression-bodied property
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
