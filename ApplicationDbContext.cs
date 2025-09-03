@@ -34,7 +34,7 @@ namespace E_CommerceSystem
             modelBuilder.Entity<Product>() 
                 .HasOne(p => p.Category) // Each Product has one Category
                 .WithMany(c => c.Products) // Each Category has many Products
-                .HasForeignKey(p => p.CategoryId)
+                .HasForeignKey(p => p.CategoryId) // Foreign key in Product
                 .OnDelete(DeleteBehavior.Restrict);
 
         }
