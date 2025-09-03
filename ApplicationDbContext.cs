@@ -48,6 +48,9 @@ namespace E_CommerceSystem
             modelBuilder.Entity<Category>()
             .HasIndex(c => c.Name).IsUnique(); // Unique index on Category Name
 
+            modelBuilder.Entity<Supplier>()
+            .HasIndex(s => s.Name).IsUnique(); // Unique index on Supplier Name
+
         }
     }
 }
