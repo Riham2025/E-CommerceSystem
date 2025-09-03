@@ -11,9 +11,9 @@ namespace E_CommerceSystem.Models
         public string Name { get; set; } = null!; // Non-nullable
 
         [MaxLength(500)] // Optional description of the category
-        public string? Description { get; set; }
+        public string? Description { get; set; } // Nullable
 
         // One Category → Many Products
-        public ICollection<Product> Products { get; set; } = new List<Product>();
+        public ICollection<Product> Products { get; set; } = new List<Product>(); // Initialize to avoid null reference
     }
 }
