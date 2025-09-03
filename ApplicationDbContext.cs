@@ -45,6 +45,9 @@ namespace E_CommerceSystem
                 .HasForeignKey(p => p.SupplierId) // Foreign key in Product
                 .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
 
+            modelBuilder.Entity<Category>()
+            .HasIndex(c => c.Name).IsUnique(); // Unique index on Category Name
+
         }
     }
 }
