@@ -8,9 +8,9 @@ namespace E_CommerceSystem.Models
         [Key] public int CategoryId { get; set; } // Primary Key
 
         [Required, MaxLength(100)] // Name of the category
-        public string Name { get; set; } = null!;
+        public string Name { get; set; } = null!; // Non-nullable
 
-        [MaxLength(500)]
+        [MaxLength(500)] // Optional description of the category
         public string? Description { get; set; }
 
         // One Category → Many Products
