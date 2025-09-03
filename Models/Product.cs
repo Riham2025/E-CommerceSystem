@@ -33,7 +33,7 @@ namespace E_CommerceSystem.Models
         public int CategoryId { get; set; } // FK → Category
         public Category Category { get; set; } = null!;
 
-        public int SupplierId { get; set; }          // FK → Supplier
+        public int SupplierId { get; set; } // FK → Supplier
         public Supplier Supplier { get; set; } = null!;
 
     }
