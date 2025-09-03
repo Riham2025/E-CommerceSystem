@@ -31,8 +31,8 @@ namespace E_CommerceSystem
                         .IsUnique();
 
             // Category (1) → (many) Products
-            modelBuilder.Entity<Product>()
-                .HasOne(p => p.Category)
+            modelBuilder.Entity<Product>() 
+                .HasOne(p => p.Category) // Each Product has one Category
                 .WithMany(c => c.Products)
                 .HasForeignKey(p => p.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
