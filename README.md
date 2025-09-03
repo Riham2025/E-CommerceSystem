@@ -34,11 +34,11 @@ One Order → Many OrderProducts
 
 Join table for many-to-many (Order ↔ Product) with quantity
 
-Reviews
+**Reviews :
 
 Stores product reviews (fields: ReviewID, Rating, Comment, UID, PID)
 
-New Models (
+
 
 
 
