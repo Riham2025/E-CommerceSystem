@@ -266,3 +266,8 @@ ISupplierRepo / SupplierRepo
 
 Business logic lives in Services; controllers talk to Services using DTOs.
 AutoMapper replaces manual mapping across the system.
+
+# Register:
+```
+builder.Services.AddAutoMapper(typeof(Program));
+```
