@@ -301,7 +301,7 @@ public record SupplierReadDto(int SupplierId, string Name, string ContactEmail, 
 ```
 
 # Mapping Profile (sample)
-
+```
 public class MappingProfile : Profile
 {
     public MappingProfile()
@@ -319,3 +319,18 @@ public class MappingProfile : Profile
           .ForMember(d => d.ReviewDate, o => o.MapFrom(_ => DateTime.UtcNow));
     }
 }
+```
+
+# Controllers
+
+Controllers are thin; they call services and return results.
+
+HTTP Method Mapping
+
+GET – fetch (e.g., all products, product by id)
+
+POST – create (e.g., place order, add product)
+
+PUT – update (e.g., edit product)
+
+DELETE – remove (e.g., delete review)
