@@ -384,3 +384,5 @@ Authorization: Bearer <token>
 Claims: sub (user id), name, role, jti
 
 Signed with SecretKey, expires per ExpiryInMinutes
+
+# Extract user id from token
