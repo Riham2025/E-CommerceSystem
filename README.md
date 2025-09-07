@@ -497,3 +497,19 @@ Create ICategoryRepo, ISupplierRepo (+ EF impl)
 Create ICategoryService, ISupplierService with validation and business rules
 
 CRUD endpoints with pagination and filtering
+
+# 2) Services enhancement
+
+Products: pagination & filtering by name, price range
+
+Order Summary Service: join Orders + OrderProducts + Products + Users
+
+Image upload for products (save path or blob + content type)
+
+Order cancellation: restore product stock
+
+Order status: Pending, Paid, Shipped, Delivered, Cancelled
+
+Emails: send on order placed/cancelled
+
+Invoices: generate PDF (e.g., QuestPDF / iText)
