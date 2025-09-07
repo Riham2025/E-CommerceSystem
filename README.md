@@ -271,3 +271,12 @@ AutoMapper replaces manual mapping across the system.
 ```
 builder.Services.AddAutoMapper(typeof(Program));
 ```
+
+# Inject:
+```
+public class ReviewService : IReviewService
+{
+    private readonly IMapper _mapper;
+    public ReviewService(IMapper mapper) => _mapper = mapper;
+}
+```
