@@ -280,3 +280,13 @@ public class ReviewService : IReviewService
     public ReviewService(IMapper mapper) => _mapper = mapper;
 }
 ```
+
+# DTO Example
+```
+public class OrderProductsDto
+{
+    public int OID { get; set; }
+    public int PID { get; set; }
+    public int Quantity { get; set; }
+}
+```
