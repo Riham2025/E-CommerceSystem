@@ -14,7 +14,7 @@ namespace E_CommerceSystem
         public DbSet<OrderProducts> OrderProducts { get; set; } = default!; // Junction table for Orders and Products
         public DbSet<Review> Reviews { get; set; } = default!; // Reviews table
         public DbSet<Category> Categories { get; set; } = default!; // Categories table
-        public DbSet<Supplier> Suppliers { get; set; } = default!;
+        public DbSet<Supplier> Suppliers { get; set; } = default!; // Suppliers table
         public DbSet<RefreshToken> RefreshTokens { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
