@@ -21,3 +21,21 @@ Swagger / Swashbuckle – API docs & try-it-out.
 Dependency Injection – service lifetime management.
 
 AutoMapper – DTO ↔ Entity mapping (no manual mapping).
+
+# App Settings
+
+Central configuration lives in appsettings.json (+ environment overrides).
+
+Typical keys
+
+ConnectionStrings.DefaultConnection – server, db, credentials.
+
+JwtSettings
+
+SecretKey – HMAC signing key.
+
+Issuer / Audience – token scope.
+
+ExpiryInMinutes – token lifetime.
+
+Change environment-specific values in appsettings.Development.json.
