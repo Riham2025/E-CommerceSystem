@@ -193,3 +193,9 @@ Core tables: Users, Products, Reviews, Orders, OrderProducts
 New master data tables: Categories, Suppliers
 
 FKs: Products.CategoryId, Products.SupplierId, Reviews.UID/PID, Orders.UID, OrderProducts.OID/PID
+
+# Run:
+
+``` dotnet ef migrations add Init_With_Category_Supplier
+dotnet ef database update 
+```
