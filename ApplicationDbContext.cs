@@ -13,7 +13,7 @@ namespace E_CommerceSystem
         public DbSet<Order> Orders { get; set; } = default!; // Orders table
         public DbSet<OrderProducts> OrderProducts { get; set; } = default!; // Junction table for Orders and Products
         public DbSet<Review> Reviews { get; set; } = default!; // Reviews table
-        public DbSet<Category> Categories { get; set; } = default!;
+        public DbSet<Category> Categories { get; set; } = default!; // Categories table
         public DbSet<Supplier> Suppliers { get; set; } = default!;
         public DbSet<RefreshToken> RefreshTokens { get; set; } = default!;
 
