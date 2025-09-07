@@ -86,7 +86,7 @@ CategoryId (FK → Categories) (new)
 
 SupplierId (FK → Suppliers) (new)
 
-Reviews
+# Reviews
 
 ReviewID (PK)
 
