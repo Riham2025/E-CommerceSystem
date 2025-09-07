@@ -104,7 +104,7 @@ UID (FK → Users)
 
 OrderDate, TotalAmount
 
-OrderProducts (Join Table)
+# OrderProducts (Join Table)
 
 OID (FK → Orders)
 
