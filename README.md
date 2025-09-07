@@ -490,7 +490,7 @@ Extend Product DTOs to carry CategoryId, SupplierId, and optionally names
 
 Add AutoMapper profiles and register in DI
 
-Repositories / Services / Controllers
+# Repositories / Services / Controllers
 
 Create ICategoryRepo, ISupplierRepo (+ EF impl)
 
