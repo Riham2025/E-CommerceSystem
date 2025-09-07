@@ -424,10 +424,11 @@ builder.Services.AddSwaggerGen(c =>
 
 Program.cs has three parts:
 
-Create builder
+# 1 - Create builder
 
+```
 var builder = WebApplication.CreateBuilder(args);
-
+```
 
 Register services
 
