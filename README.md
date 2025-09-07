@@ -127,3 +127,19 @@ SupplierId (PK)
 Name, ContactEmail, Phone
 
 Products (1 Supplier → Many Products)
+
+# Relationships (from the ERD)
+
+Users 1↔∞ Orders
+
+Orders ∞↔∞ Products via OrderProducts
+
+Users 1↔∞ Reviews
+
+Products 1↔∞ Reviews
+
+Categories 1↔∞ Products (new)
+
+Suppliers 1↔∞ Products (new)
+
+Orders ∞→1 Users
