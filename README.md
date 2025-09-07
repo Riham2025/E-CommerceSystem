@@ -76,7 +76,7 @@ UName, Email, Password (hashed), Phone, Role (Customer, Admin, Manager)
 
 CreatedAt
 
-Products
+# Products
 
 PID (PK)
 
