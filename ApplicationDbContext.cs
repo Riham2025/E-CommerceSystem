@@ -10,7 +10,7 @@ namespace E_CommerceSystem
         // DbSets
         public DbSet<User> Users { get; set; } = default!; // Users table
         public DbSet<Product> Products { get; set; } = default!; // Products table
-        public DbSet<Order> Orders { get; set; } = default!;
+        public DbSet<Order> Orders { get; set; } = default!; // Orders table
         public DbSet<OrderProducts> OrderProducts { get; set; } = default!;
         public DbSet<Review> Reviews { get; set; } = default!;
         public DbSet<Category> Categories { get; set; } = default!;
