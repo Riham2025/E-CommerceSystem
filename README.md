@@ -182,3 +182,14 @@ Optional unique indexes (e.g., Category.Name, Supplier.Name)
     opt.UseLazyLoadingProxies()
        .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 ```
+Install: Microsoft.EntityFrameworkCore.Proxies and make nav props virtual.
+
+# Database Schema
+
+The schema exactly matches the diagram you provided:
+
+Core tables: Users, Products, Reviews, Orders, OrderProducts
+
+New master data tables: Categories, Suppliers
+
+FKs: Products.CategoryId, Products.SupplierId, Reviews.UID/PID, Orders.UID, OrderProducts.OID/PID
