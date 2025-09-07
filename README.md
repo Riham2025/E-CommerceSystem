@@ -371,3 +371,10 @@ public class CategoriesController : ControllerBase
    # Return Types
 
 IActionResult or ActionResult<T> to convey HTTP codes + payloads.
+
+# Authentication & Authorization
+
+Login returns a JWT; subsequent calls include:
+```
+Authorization: Bearer <token>
+```
