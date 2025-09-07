@@ -112,7 +112,7 @@ PID (FK → Products)
 
 Quantity
 
-Categories (new)
+# Categories 
 
 CategoryId (PK)
 
