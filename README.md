@@ -419,3 +419,28 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 ```
+
+# Program
+
+Program.cs has three parts:
+
+Create builder
+
+var builder = WebApplication.CreateBuilder(args);
+
+
+Register services
+
+DbContext + connection string (and optional lazy loading)
+
+Repositories & Services
+
+AutoMapper profiles
+
+Controllers
+
+Authentication / Authorization
+
+Swagger, CORS, Logging (Serilog)
+
+Build pipeline
