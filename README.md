@@ -482,7 +482,7 @@ Add optional unique indexes (e.g., Category.Name, Supplier.Name)
 
 dotnet ef migrations add ... then dotnet ef database update
 
-DTOs & AutoMapper
+# DTOs & AutoMapper
 
 Create Create/Update/Read DTOs for Category & Supplier
 
