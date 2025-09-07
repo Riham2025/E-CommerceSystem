@@ -252,3 +252,9 @@ public class OrderProductsRepo
 }
 
 ```
+
+# New repos:
+
+ICategoryRepo / CategoryRepo
+
+ISupplierRepo / SupplierRepo
