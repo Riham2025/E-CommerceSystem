@@ -378,3 +378,9 @@ Login returns a JWT; subsequent calls include:
 ```
 Authorization: Bearer <token>
 ```
+
+# Token generation (concept)
+
+Claims: sub (user id), name, role, jti
+
+Signed with SecretKey, expires per ExpiryInMinutes
