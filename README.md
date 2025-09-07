@@ -201,3 +201,43 @@ dotnet ef database update
 ```
 
 # Project Structure
+```
+E-CommerceSystem/
+├─ Controllers/
+│  ├─ ProductsController.cs
+│  ├─ OrdersController.cs
+│  ├─ ReviewsController.cs
+│  ├─ UsersController.cs
+│  ├─ CategoriesController.cs          # new
+│  └─ SuppliersController.cs           # new
+├─ Services/
+│  ├─ Interfaces/
+│  ├─ Implementations/
+│  ├─ OrderSummaryService.cs           # aggregates Orders + Products + Users
+│  └─ FileStorage/ImageService.cs      # product images (upload)
+├─ Repositories/
+│  ├─ Interfaces/
+│  ├─ Ef/
+│  ├─ CategoryRepository.cs            # new
+│  └─ SupplierRepository.cs            # new
+├─ DTO/
+│  ├─ ProductDto.cs / CreateProductDto.cs / UpdateProductDto.cs
+│  ├─ CategoryDto.cs (Create/Update/Read)   # new
+│  ├─ SupplierDto.cs (Create/Update/Read)   # new
+│  ├─ OrderDtos.cs (incl. summary)
+│  └─ AuthDtos.cs
+├─ Mapping/
+│  └─ MappingProfile.cs                # AutoMapper profiles
+├─ Persistence/
+│  ├─ ApplicationDbContext.cs
+│  └─ Migrations/
+├─ Middleware/
+│  ├─ ErrorHandlingMiddleware.cs       # centralized exception → ProblemDetails
+│  └─ Serilog/                         # logging setup
+└─ Program.cs
+
+```
+
+# Repositories
+
+Each repository implements CRUD for its entity and hides EF details:
