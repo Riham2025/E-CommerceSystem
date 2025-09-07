@@ -67,3 +67,63 @@ Data annotations enforce integrity and business rules:
 [ForeignKey] relationships
 
 [JsonIgnore] to break circular refs when needed
+
+# Users
+
+UID (PK)
+
+UName, Email, Password (hashed), Phone, Role (Customer, Admin, Manager)
+
+CreatedAt
+
+Products
+
+PID (PK)
+
+ProductName, Description, Price, Stock, OverallRating
+
+CategoryId (FK → Categories) (new)
+
+SupplierId (FK → Suppliers) (new)
+
+Reviews
+
+ReviewID (PK)
+
+UID (FK → Users)
+
+PID (FK → Products)
+
+Rating, Comment, ReviewDate
+
+Orders
+
+OID (PK)
+
+UID (FK → Users)
+
+OrderDate, TotalAmount
+
+OrderProducts (Join Table)
+
+OID (FK → Orders)
+
+PID (FK → Products)
+
+Quantity
+
+Categories (new)
+
+CategoryId (PK)
+
+Name, Description
+
+Products (1 Category → Many Products)
+
+Suppliers (new)
+
+SupplierId (PK)
+
+Name, ContactEmail, Phone
+
+Products (1 Supplier → Many Products)
