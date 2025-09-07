@@ -549,3 +549,21 @@ Centralized error handling middleware → RFC 7807 ProblemDetails
 Structured logging (Serilog)
 
 # How to Run
+```
+# 1) Restore & build
+dotnet restore
+dotnet build
+
+# 2) Apply migrations
+dotnet ef database update
+
+# 3) Run
+dotnet run
+# Browse swagger:
+# https://localhost:<port>/swagger
+```
+
+# Why DTOs?
+
+DTOs shape the data you send/receive without exposing full EF entities, reduce over-posting, keep responses stable, and decouple API contracts from persistence.
+With AutoMapper, mapping is concise and consistent across controllers and services.
