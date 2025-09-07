@@ -523,3 +523,11 @@ Cookie storage for tokens (HttpOnly, Secure)
 Password hashing (BCrypt)
 
 Roles: Admin, Customer, Manager – protect endpoints with [Authorize(Roles="...")]
+
+# 4) Business rules
+
+A user can review only purchased products
+
+One review per product per user
+
+Concurrency protection (rowversion/timestamp) for Products & Orders
