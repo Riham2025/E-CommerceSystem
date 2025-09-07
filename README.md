@@ -120,7 +120,7 @@ Name, Description
 
 Products (1 Category → Many Products)
 
-Suppliers (new)
+# Suppliers 
 
 SupplierId (PK)
 
