@@ -547,3 +547,5 @@ Most active customers
 Centralized error handling middleware → RFC 7807 ProblemDetails
 
 Structured logging (Serilog)
+
+# How to Run
