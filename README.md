@@ -430,7 +430,7 @@ Program.cs has three parts:
 var builder = WebApplication.CreateBuilder(args);
 ```
 
-Register services
+# 2- Register services
 
 DbContext + connection string (and optional lazy loading)
 
