@@ -176,4 +176,9 @@ Required FKs
 
 Optional unique indexes (e.g., Category.Name, Supplier.Name)
 
-Enable lazy loading (optional):
+# Enable lazy loading (optional):
+
+```  builder.Services.AddDbContext<ApplicationDbContext>(opt =>
+    opt.UseLazyLoadingProxies()
+       .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+```
