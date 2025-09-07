@@ -541,3 +541,9 @@ Revenue per day/month
 Top-rated products
 
 Most active customers
+
+# 6) Code Quality
+
+Centralized error handling middleware → RFC 7807 ProblemDetails
+
+Structured logging (Serilog)
