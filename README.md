@@ -138,8 +138,24 @@ Users 1↔∞ Reviews
 
 Products 1↔∞ Reviews
 
-Categories 1↔∞ Products (new)
+Categories 1↔∞ Products 
 
-Suppliers 1↔∞ Products (new)
+Suppliers 1↔∞ Products 
 
 Orders ∞→1 Users
+
+# Navigation Summary
+
+Order → User, OrderProducts[]
+
+OrderProduct → Order, Product
+
+Product → Category, Supplier, Reviews[], OrderProducts[]
+
+Review → User, Product
+
+User → Orders[], Reviews[]
+
+Category → Products[]
+
+Supplier → Products[]
