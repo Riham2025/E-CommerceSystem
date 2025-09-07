@@ -39,3 +39,17 @@ Issuer / Audience – token scope.
 ExpiryInMinutes – token lifetime.
 
 Change environment-specific values in appsettings.Development.json.
+
+# Launch Settings
+
+Properties/launchSettings.json controls how the app runs locally.
+
+Profiles (Kestrel, IIS Express, Docker)
+
+Application URLs (e.g. https://localhost:7147)
+
+Environment variables (e.g. ASPNETCORE_ENVIRONMENT=Development)
+
+Auto-launch browser & command-line args for debugging
+
+Not used in production; for local development only.
