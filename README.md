@@ -334,3 +334,37 @@ POST – create (e.g., place order, add product)
 PUT – update (e.g., edit product)
 
 DELETE – remove (e.g., delete review)
+
+# Sample
+```
+[ApiController]
+[Route("api/[controller]")]
+public class CategoriesController : ControllerBase
+{
+    private readonly ICategoryService _svc;
+    private readonly IMapper _mapper;
+
+    public CategoriesController(ICategoryService svc, IMapper mapper)
+    { _svc = svc; _mapper = mapper; }
+
+    [HttpPost]
+    public ActionResult<CategoryReadDto> Create(CategoryCreateDto dto)
+        => Ok(_svc.Create(dto));
+
+    [HttpGet("{id:int}")]
+    public ActionResult<CategoryReadDto> Get(int id)
+        => Ok(_svc.Get(id));
+
+    [HttpGet]
+    public ActionResult<IEnumerable<CategoryReadDto>> GetAll([FromQuery]int page=1,[FromQuery]int size=20)
+        => Ok(_svc.GetAll(page,size));
+
+    [HttpPut("{id:int}")]
+    public IActionResult Update(int id, CategoryCreateDto dto)
+    { _svc.Update(id,dto); return NoContent(); }
+
+    [HttpDelete("{id:int}")]
+    public IActionResult Delete(int id)
+    { _svc.Delete(id); return NoContent(); }
+
+    ```
