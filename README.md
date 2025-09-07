@@ -199,3 +199,5 @@ FKs: Products.CategoryId, Products.SupplierId, Reviews.UID/PID, Orders.UID, Orde
 ``` dotnet ef migrations add Init_With_Category_Supplier
 dotnet ef database update 
 ```
+
+# Project Structure
