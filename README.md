@@ -299,3 +299,23 @@ public record CategoryReadDto(int CategoryId, string Name, string? Description);
 public record SupplierCreateDto(string Name, string ContactEmail, string? Phone);
 public record SupplierReadDto(int SupplierId, string Name, string ContactEmail, string? Phone);
 ```
+
+# Mapping Profile (sample)
+
+public class MappingProfile : Profile
+{
+    public MappingProfile()
+    {
+        CreateMap<Category, CategoryReadDto>();
+        CreateMap<CategoryCreateDto, Category>();
+
+        CreateMap<Supplier, SupplierReadDto>();
+        CreateMap<SupplierCreateDto, Supplier>();
+
+        // Example: pass route values/context
+        CreateMap<ReviewDto, Review>()
+          .ForMember(d => d.PID, o => o.MapFrom((src, _, __, ctx) => (int)ctx.Items["pid"]))
+          .ForMember(d => d.UID, o => o.MapFrom((src, _, __, ctx) => (int)ctx.Items["uid"]))
+          .ForMember(d => d.ReviewDate, o => o.MapFrom(_ => DateTime.UtcNow));
+    }
+}
