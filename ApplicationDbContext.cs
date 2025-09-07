@@ -11,7 +11,7 @@ namespace E_CommerceSystem
         public DbSet<User> Users { get; set; } = default!; // Users table
         public DbSet<Product> Products { get; set; } = default!; // Products table
         public DbSet<Order> Orders { get; set; } = default!; // Orders table
-        public DbSet<OrderProducts> OrderProducts { get; set; } = default!;
+        public DbSet<OrderProducts> OrderProducts { get; set; } = default!; // Junction table for Orders and Products
         public DbSet<Review> Reviews { get; set; } = default!;
         public DbSet<Category> Categories { get; set; } = default!;
         public DbSet<Supplier> Suppliers { get; set; } = default!;
