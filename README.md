@@ -53,3 +53,17 @@ Environment variables (e.g. ASPNETCORE_ENVIRONMENT=Development)
 Auto-launch browser & command-line args for debugging
 
 Not used in production; for local development only.
+
+# Models with Data Annotations & Validation
+
+Data annotations enforce integrity and business rules:
+
+[Key] primary keys
+
+[Required], [MaxLength], [Range]
+
+[EmailAddress], [RegularExpression]
+
+[ForeignKey] relationships
+
+[JsonIgnore] to break circular refs when needed
