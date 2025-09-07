@@ -290,3 +290,12 @@ public class OrderProductsDto
     public int Quantity { get; set; }
 }
 ```
+
+# Category / Supplier DTOs (new)
+```
+public record CategoryCreateDto(string Name, string? Description);
+public record CategoryReadDto(int CategoryId, string Name, string? Description);
+
+public record SupplierCreateDto(string Name, string ContactEmail, string? Phone);
+public record SupplierReadDto(int SupplierId, string Name, string ContactEmail, string? Phone);
+```
