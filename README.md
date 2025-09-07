@@ -386,3 +386,36 @@ Claims: sub (user id), name, role, jti
 Signed with SecretKey, expires per ExpiryInMinutes
 
 # Extract user id from token
+
+```
+var token = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+// read with JwtSecurityTokenHandler, get "sub" claim
+```
+
+# Swagger (JWT Support)
+
+Use the Bearer scheme so Swagger injects the header correctly.
+
+```
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "ECommerceSystem", Version = "v1" });
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "JWT in the form: Bearer {token}",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT"
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme{ Reference = new OpenApiReference{
+                Type = ReferenceType.SecurityScheme, Id = "Bearer" } },
+            Array.Empty<string>()
+        }
+    });
+});
+```
