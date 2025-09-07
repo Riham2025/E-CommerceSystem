@@ -531,3 +531,13 @@ A user can review only purchased products
 One review per product per user
 
 Concurrency protection (rowversion/timestamp) for Products & Orders
+
+# 5) Reports & Analytics (Admin)
+
+Best-selling products
+
+Revenue per day/month
+
+Top-rated products
+
+Most active customers
