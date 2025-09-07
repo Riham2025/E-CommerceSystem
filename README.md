@@ -255,6 +255,14 @@ public class OrderProductsRepo
 
 # New repos:
 
+``` 
 ICategoryRepo / CategoryRepo
-
+```
+```
 ISupplierRepo / SupplierRepo
+```
+
+# Services with DTO (and AutoMapper)
+
+Business logic lives in Services; controllers talk to Services using DTOs.
+AutoMapper replaces manual mapping across the system.
