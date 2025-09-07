@@ -159,3 +159,21 @@ User → Orders[], Reviews[]
 Category → Products[]
 
 Supplier → Products[]
+
+# DbContext
+
+ApplicationDbContext : DbContext holds the session with SQL Server.
+
+DbSet<T>: Users, Products, Reviews, Orders, OrderProducts, Categories, Suppliers
+
+OnModelCreating configures:
+
+Composite key for OrderProducts (OID,PID)
+
+Required FKs
+
+1→∞ for Category→Products and Supplier→Products
+
+Optional unique indexes (e.g., Category.Name, Supplier.Name)
+
+Enable lazy loading (optional):
