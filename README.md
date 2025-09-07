@@ -366,5 +366,8 @@ public class CategoriesController : ControllerBase
     [HttpDelete("{id:int}")]
     public IActionResult Delete(int id)
     { _svc.Delete(id); return NoContent(); }
+```
 
-    ```
+   # Return Types
+
+IActionResult or ActionResult<T> to convey HTTP codes + payloads.
