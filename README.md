@@ -241,3 +241,14 @@ E-CommerceSystem/
 # Repositories
 
 Each repository implements CRUD for its entity and hides EF details:
+
+# Example : 
+```
+public class OrderProductsRepo
+{
+    private readonly ApplicationDbContext _context;
+    public OrderProductsRepo(ApplicationDbContext context) => _context = context;
+    // Add, Get, Update, Delete...
+}
+
+```
