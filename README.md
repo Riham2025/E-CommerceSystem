@@ -445,3 +445,21 @@ Authentication / Authorization
 Swagger, CORS, Logging (Serilog)
 
 # 3 - Build pipeline
+
+```
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
+app.Run();
+```
+
+# Guide to Implement Additional Features
