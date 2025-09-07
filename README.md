@@ -463,3 +463,37 @@ app.Run();
 ```
 
 # Guide to Implement Additional Features
+
+# 1) Add new models (done here)
+
+Category: CategoryId, Name, Description
+Relationship: 1 Category → ∞ Products
+
+Supplier: SupplierId, Name, ContactEmail, Phone
+Relationship: 1 Supplier → ∞ Products
+
+Model/DB steps
+
+Add FKs to Product (CategoryId, SupplierId)
+
+Configure relations in OnModelCreating
+
+Add optional unique indexes (e.g., Category.Name, Supplier.Name)
+
+dotnet ef migrations add ... then dotnet ef database update
+
+DTOs & AutoMapper
+
+Create Create/Update/Read DTOs for Category & Supplier
+
+Extend Product DTOs to carry CategoryId, SupplierId, and optionally names
+
+Add AutoMapper profiles and register in DI
+
+Repositories / Services / Controllers
+
+Create ICategoryRepo, ISupplierRepo (+ EF impl)
+
+Create ICategoryService, ISupplierService with validation and business rules
+
+CRUD endpoints with pagination and filtering
