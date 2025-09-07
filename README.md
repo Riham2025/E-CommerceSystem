@@ -513,3 +513,13 @@ Order status: Pending, Paid, Shipped, Delivered, Cancelled
 Emails: send on order placed/cancelled
 
 Invoices: generate PDF (e.g., QuestPDF / iText)
+
+# 3) Security
+
+Refresh tokens for JWT
+
+Cookie storage for tokens (HttpOnly, Secure)
+
+Password hashing (BCrypt)
+
+Roles: Admin, Customer, Manager – protect endpoints with [Authorize(Roles="...")]
