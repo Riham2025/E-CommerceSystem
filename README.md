@@ -472,7 +472,7 @@ Relationship: 1 Category → ∞ Products
 Supplier: SupplierId, Name, ContactEmail, Phone
 Relationship: 1 Supplier → ∞ Products
 
-Model/DB steps
+# Model/DB steps
 
 Add FKs to Product (CategoryId, SupplierId)
 
