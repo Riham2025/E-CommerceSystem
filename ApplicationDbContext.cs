@@ -18,9 +18,9 @@ namespace E_CommerceSystem
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) // Fluent API configurations
         {
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder); // Call base method
 
-            
+
             modelBuilder.Entity<User>()
                         .HasIndex(u => u.Email)
                         .IsUnique();
