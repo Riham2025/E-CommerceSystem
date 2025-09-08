@@ -20,15 +20,17 @@ namespace E_CommerceSystem
         {
             base.OnModelCreating(modelBuilder); // Call base method
 
-
-            modelBuilder.Entity<User>()
+            // Unique constraints
+            modelBuilder.Entity<User>() 
                         .HasIndex(u => u.Email)
                         .IsUnique();
 
+            // Unique constraint on Product Name within the same Supplier
             modelBuilder.Entity<Category>()
                         .HasIndex(c => c.Name)
                         .IsUnique();
 
+            //
             modelBuilder.Entity<Supplier>()
                         .HasIndex(s => s.Name)
                         .IsUnique();
