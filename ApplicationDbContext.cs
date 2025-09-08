@@ -42,7 +42,7 @@ namespace E_CommerceSystem
                 .HasForeignKey(p => p.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            
+            // Prevent cascade delete to avoid accidental deletions
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.Supplier)
                 .WithMany(s => s.Products)
