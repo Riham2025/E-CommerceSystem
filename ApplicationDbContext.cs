@@ -35,7 +35,7 @@ namespace E_CommerceSystem
                         .HasIndex(s => s.Name)
                         .IsUnique();
 
-            
+            // Composite key for OrderProducts
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.Category)
                 .WithMany(c => c.Products)
