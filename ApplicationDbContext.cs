@@ -25,7 +25,7 @@ namespace E_CommerceSystem
                         .HasIndex(u => u.Email)
                         .IsUnique();
 
-            // Unique constraint on Product Name within the same Supplier
+            // 
             modelBuilder.Entity<Category>()
                         .HasIndex(c => c.Name)
                         .IsUnique();
