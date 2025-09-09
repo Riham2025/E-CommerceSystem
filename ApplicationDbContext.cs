@@ -63,7 +63,7 @@ namespace E_CommerceSystem
             modelBuilder.Entity<Product>()
                 .Property(p => p.RowVersion)
                 .IsRowVersion();
-
+            // Concurrency token for Order
             modelBuilder.Entity<Order>()
                 .Property(o => o.RowVersion)
                 .IsRowVersion();
