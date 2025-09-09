@@ -59,7 +59,7 @@ namespace E_CommerceSystem
                 .Property(o => o.Status)
                 .HasConversion<string>()
                 .HasMaxLength(20);
-
+            // Concurrency tokens
             modelBuilder.Entity<Product>()
                 .Property(p => p.RowVersion)
                 .IsRowVersion();
