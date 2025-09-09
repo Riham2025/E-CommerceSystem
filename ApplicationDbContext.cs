@@ -54,7 +54,7 @@ namespace E_CommerceSystem
                 .HasIndex(r => new { r.PID, r.UID })
                 .IsUnique();
 
-            
+            // Enum to string conversion for Order Status
             modelBuilder.Entity<Order>()
                 .Property(o => o.Status)
                 .HasConversion<string>()
