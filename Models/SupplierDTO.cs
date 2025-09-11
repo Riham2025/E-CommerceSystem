@@ -47,16 +47,16 @@ namespace E_CommerceSystem.Models
         // Read
         public class SupplierReadDto
         {
-            [Required]
+            [Required] // Primary Key
             public int SupplierId { get; set; }
 
-            [Required]
+            [Required] // Non-nullable
             public string Name { get; set; } = default!;
 
-            [EmailAddress]
+            [EmailAddress] // Optional
             public string? ContactEmail { get; set; }
 
-            [Phone]
+            [Phone] // Optional
             public string? Phone { get; set; }
         }
     }
