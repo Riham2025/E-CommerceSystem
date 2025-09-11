@@ -35,8 +35,8 @@ namespace E_CommerceSystem.Models
         // Read
         public class CategoryReadDto
         {
-            [Required]
-            public int CategoryId { get; set; }
+            [Required] // Primary Key
+            public int CategoryId { get; set; } // Primary Key
 
             [Required]
             public string Name { get; set; } = default!;
