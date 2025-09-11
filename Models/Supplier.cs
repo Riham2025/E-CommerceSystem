@@ -12,7 +12,7 @@ namespace E_CommerceSystem.Models
         [Required, MaxLength(120)] // Name of the supplier
         public string Name { get; set; } = null!; // Non-nullable
 
-        [EmailAddress, MaxLength(200)]
+        [EmailAddress, MaxLength(200)] // Optional contact email
         public string? ContactEmail { get; set; }
 
         [MaxLength(30)]
