@@ -39,9 +39,9 @@ namespace E_CommerceSystem.Models
             public int CategoryId { get; set; } // Primary Key
 
             [Required]
-            public string Name { get; set; } = default!;
+            public string Name { get; set; } = default!; // Non-nullable
 
-            public string? Description { get; set; }
+            public string? Description { get; set; } // Nullable
         }
     }
 }
