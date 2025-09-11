@@ -7,7 +7,7 @@ namespace E_CommerceSystem.Mapping
     {
         public SupplierProfile()
         {
-            CreateMap<SupplierDTO.SupplierCreateDto, Supplier>();
+            CreateMap<SupplierDTO.SupplierCreateDto, Supplier>(); // Create → Entity
             CreateMap<SupplierDTO.SupplierUpdateDto, Supplier>();
             CreateMap<Supplier, SupplierDTO.SupplierReadDto>();
         }
