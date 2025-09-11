@@ -18,7 +18,7 @@ namespace E_CommerceSystem.Models
         public class CategoryCreateDto 
         {
             [Required]
-            public string Name { get; set; } = default!;
+            public string Name { get; set; } = default!; // Non-nullable
 
             public string? Description { get; set; }
         }
