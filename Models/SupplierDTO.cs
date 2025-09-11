@@ -21,7 +21,7 @@ namespace E_CommerceSystem.Models
         // Create
         public class SupplierCreateDto
         {
-            [Required]
+            [Required] // Non-nullable
             public string Name { get; set; } = default!;
 
             [EmailAddress]
