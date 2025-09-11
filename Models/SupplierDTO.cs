@@ -27,8 +27,8 @@ namespace E_CommerceSystem.Models
             [EmailAddress] // Optional
             public string? ContactEmail { get; set; }
 
-            [Phone]
-            public string? Phone { get; set; }
+            [Phone] // Optional
+            public string? Phone { get; set; } 
         }
 
         // Update
