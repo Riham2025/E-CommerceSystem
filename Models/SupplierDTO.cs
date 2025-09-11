@@ -24,7 +24,7 @@ namespace E_CommerceSystem.Models
             [Required] // Non-nullable
             public string Name { get; set; } = default!;
 
-            [EmailAddress]
+            [EmailAddress] // Optional
             public string? ContactEmail { get; set; }
 
             [Phone]
