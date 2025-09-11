@@ -10,7 +10,7 @@ namespace E_CommerceSystem.Models
         public string? Description { get; set; } // Nullable
 
         [Required] // Primary Key
-        public int CategoryId { get; set; }
+        public int CategoryId { get; set; } // Primary Key
 
         // === Nested DTOs (as classes) for AutoMapper ===
 
