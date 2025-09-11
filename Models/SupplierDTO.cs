@@ -11,7 +11,7 @@ namespace E_CommerceSystem.Models
         public string? ContactEmail { get; set; } // Nullable
 
         [Phone]
-        public string? Phone { get; set; }
+        public string? Phone { get; set; } // Nullable
 
         [Required]
         public int SupplierId { get; set; }
