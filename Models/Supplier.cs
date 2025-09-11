@@ -13,9 +13,9 @@ namespace E_CommerceSystem.Models
         public string Name { get; set; } = null!; // Non-nullable
 
         [EmailAddress, MaxLength(200)] // Optional contact email
-        public string? ContactEmail { get; set; }
+        public string? ContactEmail { get; set; } // Nullable
 
-        [MaxLength(30)]
+        [MaxLength(30)] // Optional phone number
         public string? Phone { get; set; }
 
         // 1 Supplier -> many Products
