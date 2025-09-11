@@ -15,7 +15,7 @@ namespace E_CommerceSystem.Models
         // === Nested DTOs (as classes) for AutoMapper ===
 
         // Create
-        public class CategoryCreateDto
+        public class CategoryCreateDto 
         {
             [Required]
             public string Name { get; set; } = default!;
