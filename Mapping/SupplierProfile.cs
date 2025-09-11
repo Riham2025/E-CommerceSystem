@@ -9,7 +9,7 @@ namespace E_CommerceSystem.Mapping
         {
             CreateMap<SupplierDTO.SupplierCreateDto, Supplier>(); // Create → Entity
             CreateMap<SupplierDTO.SupplierUpdateDto, Supplier>(); // Update → Entity (Map(dto, entity))
-            CreateMap<Supplier, SupplierDTO.SupplierReadDto>();
+            CreateMap<Supplier, SupplierDTO.SupplierReadDto>(); // Entity → Read
         }
     }
 }
