@@ -14,7 +14,7 @@ namespace E_CommerceSystem.Models
         public string? Phone { get; set; } // Nullable
 
         [Required]
-        public int SupplierId { get; set; }
+        public int SupplierId { get; set; } // Primary Key
 
         // === Nested DTOs (as classes) for AutoMapper ===
 
