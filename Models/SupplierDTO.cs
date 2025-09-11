@@ -8,7 +8,7 @@ namespace E_CommerceSystem.Models
         public string Name { get; set; } = default!; // Non-nullable
 
         [EmailAddress]
-        public string? ContactEmail { get; set; }
+        public string? ContactEmail { get; set; } // Nullable
 
         [Phone]
         public string? Phone { get; set; }
