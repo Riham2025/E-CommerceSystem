@@ -26,10 +26,10 @@ namespace E_CommerceSystem.Models
         // Update
         public class CategoryUpdateDto
         {
-            [Required]
-            public string Name { get; set; } = default!;
+            [Required] // Primary Key
+            public string Name { get; set; } = default!; // Non-nullable
 
-            public string? Description { get; set; }
+            public string? Description { get; set; } // Nullable
         }
 
         // Read
