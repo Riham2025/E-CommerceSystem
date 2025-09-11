@@ -23,9 +23,5 @@ namespace E_CommerceSystem.Models
     }
 }
 
-// جزء من Product (إن لم يكن موجوداً)
-public int? CategoryId { get; set; }
-public virtual Category? Category { get; set; }
 
-public int? SupplierId { get; set; }
-public virtual Supplier? Supplier { get; set; }
+

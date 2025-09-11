@@ -36,5 +36,8 @@ namespace E_CommerceSystem.Models
         public int SupplierId { get; set; } // FK → Supplier
         public Supplier Supplier { get; set; } = null!;
 
+
+
+
     }
 }

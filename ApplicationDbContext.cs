@@ -67,6 +67,10 @@ namespace E_CommerceSystem
             modelBuilder.Entity<Order>()
                 .Property(o => o.RowVersion)
                 .IsRowVersion();
+
+
+
+
         }
     }
 }
