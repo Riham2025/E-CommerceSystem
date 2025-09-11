@@ -5,7 +5,7 @@ namespace E_CommerceSystem.Models
     public class CategoryDTO // Data Transfer Object (DTO) for Category
     {
         [Required]
-        public string Name { get; set; } = default!;
+        public string Name { get; set; } = default!; // Non-nullable
 
         public string? Description { get; set; }
 
