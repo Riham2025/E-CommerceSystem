@@ -34,13 +34,13 @@ namespace E_CommerceSystem.Models
         // Update
         public class SupplierUpdateDto
         {
-            [Required]
+            [Required] // Primary Key
             public string Name { get; set; } = default!;
 
-            [EmailAddress]
+            [EmailAddress] // Optional
             public string? ContactEmail { get; set; }
 
-            [Phone]
+            [Phone] // Optional
             public string? Phone { get; set; }
         }
 
